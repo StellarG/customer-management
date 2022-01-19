@@ -9,7 +9,6 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class CustomerDTO {
-    private String searchByCustomerName;
-    private String searchByCustomerPhone;
+public class CreditAllowanceDTO {
+    private String searchByCreditStatus;
 }

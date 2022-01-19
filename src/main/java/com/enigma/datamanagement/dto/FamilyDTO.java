@@ -9,7 +9,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class CustomerDTO {
-    private String searchByCustomerName;
-    private String searchByCustomerPhone;
+public class FamilyDTO {
+    private String searchByMotherName;
+    private String searchByFamilyPhone;
 }

@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.GenericGenerator;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
@@ -17,48 +16,45 @@ import java.util.Date;
 @NoArgsConstructor
 @Getter
 @Setter
-public class Family {
-    @Id
-    @GeneratedValue(generator = "system-uuid")
-    @GenericGenerator(name = "system-uuid",strategy = "uuid")
-    private String id;
+public class Family extends BaseEntity{
 
     @OneToOne(targetEntity = Customer.class, fetch = FetchType.EAGER)
     @JoinColumn(name = "customer_id")
     private Customer customerId;
 
-    @Column(name = "mother_name")
+    @Column(name = "mother_name",length = 50,nullable = false)
     private String motherName;
 
-    @Column(name = "family_address")
+    @Column(name = "family_address",nullable = false)
     private String address;
 
-    @Column(name = "family_phone")
+    @Column(name = "family_phone",length = 14,nullable = false)
     private String phone;
 
     @CreatedDate
     @Column(updatable = false)
-    private Date createdAt;
+    private Date createdBy;
 
     @LastModifiedDate
-    private Date updatedAt;
+    private Date updatedBy;
 
     private Boolean isDeleted;
 
     @PrePersist
     private void insertBefore() {
-        if (this.createdAt == null) {
-            this.createdAt = new Date();
+        if (this.createdBy == null) {
+            this.createdBy = new Date();
         }
 
-        if (this.updatedAt == null) {
-            this.updatedAt = new Date();
+        if (this.updatedBy == null) {
+            this.updatedBy = new Date();
         }
 
         if (isDeleted == null) isDeleted = false;
     }
     @PreUpdate
     private void updateBefore() {
-        this.updatedAt = new Date();
+        this.updatedBy = new Date();
     }
+
 }
