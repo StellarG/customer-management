@@ -10,5 +10,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface FamilyRepository extends JpaRepository<Family, String> {
+    Page<Family> findAll(Pageable pageable);
     Page<Family> findAll(Specification<Family> specification, Pageable pageable);
 }

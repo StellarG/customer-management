@@ -9,8 +9,6 @@ import com.enigma.datamanagement.request.CustomerRequest;
 import com.enigma.datamanagement.response.CustomerResponse;
 import com.enigma.datamanagement.response.PageResponse;
 import com.enigma.datamanagement.service.CustomerService;
-import com.enigma.datamanagement.service.FamilyService;
-import com.enigma.datamanagement.service.JobService;
 import com.enigma.datamanagement.util.WebResponse;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,26 +22,23 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(value = "/customers")
-@NoArgsConstructor
 public class CustomerController {
 
     @Autowired
     protected CustomerService customerService;
-    @Autowired
-    protected FamilyService familyService;
-    @Autowired
-    protected JobService jobService;
 
 
-    @PostMapping
+
+    @PostMapping(consumes = "application/json", produces = "application/json")
     public ResponseEntity<WebResponse<?>> create (@RequestBody CustomerRequest request){
 
         Customer customer = new Customer();
         customer.setName(request.getName());
         customer.setPlaceOfBirth(request.getPlaceOfBirth());
-        customer.setBirthDate(request.getDateOfBirth());
+        customer.setBirthDate(request.getBirthDate());
         customer.setAddress(request.getAddress());
         customer.setPhone(request.getPhone());
+        customer.setReligion(request.getReligion());
 
         Family family = new Family();
         family.setMotherName(request.getMotherName());
@@ -93,8 +88,8 @@ public class CustomerController {
     }
 
     @PutMapping(value = "/{customerId}")
-    public ResponseEntity<WebResponse<?>> update (@RequestBody Customer customer){
-        Customer customerUpdate = customerService.update(customer);
+    public ResponseEntity<WebResponse<?>> update (@RequestBody String id, Customer customer){
+        Customer customerUpdate = customerService.update(id,customer);
         WebResponse<?> response = new WebResponse<>("Data Successfully Updated",customerUpdate);
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }

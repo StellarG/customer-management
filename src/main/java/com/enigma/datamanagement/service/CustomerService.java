@@ -12,8 +12,12 @@ import org.springframework.data.domain.Sort;
 public interface CustomerService{
 
     CustomerResponse create (Customer customer, Family family, Job job);
+
     Page<Customer> getAll (Pageable pageable, CustomerDTO customerDTO, Sort sort);
+
     Customer getById (String id);
-    Customer update(Customer customer);
+
+    Customer update(String id,Customer customer);
+
     String delete (String id);
 }

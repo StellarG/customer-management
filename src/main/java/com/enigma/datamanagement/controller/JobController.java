@@ -33,7 +33,7 @@ public class JobController {
     public ResponseEntity<WebResponse<PageResponse<?>>> getAll (
             @RequestParam(name = "size", defaultValue = "10") Integer size,
             @RequestParam(name = "page",defaultValue = "0") Integer page,
-            @RequestParam(name = "sortBy",defaultValue = "name") String sortBy,
+            @RequestParam(name = "sortBy",defaultValue = "companyName") String sortBy,
             @RequestParam(name = "direction",defaultValue = "ASC") String direction
     ){
         Sort sort = Sort.by(Sort.Direction.fromString(direction),sortBy);

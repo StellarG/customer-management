@@ -66,14 +66,26 @@ public class CustomerServiceImpl implements CustomerService{
     }
 
     @Override
-    public Customer update(Customer customer) {
-        findByIdOrThrowNotFound(customer.getId());
+    public Customer update(String id,Customer customer) {
+
+        Customer updateCustomer = findByIdOrThrowNotFound(id);
+        updateCustomer.setName(customer.getName());
+        updateCustomer.setPlaceOfBirth(customer.getPlaceOfBirth());
+        updateCustomer.setBirthDate(customer.getBirthDate());
+        updateCustomer.setAddress(customer.getAddress());
+        updateCustomer.setPhone(customer.getPhone());
+        updateCustomer.setReligion(customer.getReligion());
+
         return customerRepository.save(customer);
     }
 
     @Override
     public String delete(String id) {
         Customer customer = findByIdOrThrowNotFound(id);
+        if (customer.getIsDeleted() == null) {
+            customer.setIsDeleted(false);
+            customerRepository.save(customer);
+        }
         if (customer.getIsDeleted()){
             throw new NotFoundException("Customer Not Found!");
         } else {

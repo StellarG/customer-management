@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
@@ -17,6 +19,8 @@ import java.util.Date;
 @NoArgsConstructor
 @Getter
 @Setter
+@SQLDelete(sql = "UPDATE customers SET isDeleted = true WHERE id=?")
+@Where(clause = "is_Deleted=false")
 public class Job extends BaseEntity{
 
     @ManyToOne(targetEntity = Customer.class, fetch = FetchType.EAGER)

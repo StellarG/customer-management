@@ -33,14 +33,14 @@ public class FamilyController {
     public ResponseEntity<WebResponse<PageResponse<?>>> getAll (
             @RequestParam(name = "size", defaultValue = "10") Integer size,
             @RequestParam(name = "page",defaultValue = "0") Integer page,
-            @RequestParam(name = "sortBy",defaultValue = "name") String sortBy,
+            @RequestParam(name = "sortBy",defaultValue = "motherName") String sortBy,
             @RequestParam(name = "direction",defaultValue = "ASC") String direction,
-            @RequestParam(name = "motherName",required = false) String name,
-            @RequestParam(name = "familyPhone",required = false) String phone
+            @RequestParam(name = "motherName",required = false) String motherName,
+            @RequestParam(name = "familyPhone",required = false) String familyPhone
     ){
         Sort sort = Sort.by(Sort.Direction.fromString(direction),sortBy);
         Pageable pageable = PageRequest.of(page,size,sort);
-        FamilyDTO familyDTO = new FamilyDTO(name,phone);
+        FamilyDTO familyDTO = new FamilyDTO(motherName,familyPhone);
         Page<Family> getFamily = familyService.getAll(pageable, familyDTO, sort);
         PageResponse<Family> pageResponse = new PageResponse<>(
                 getFamily.getContent(),

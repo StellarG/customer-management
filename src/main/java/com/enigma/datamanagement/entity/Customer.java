@@ -5,7 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 import org.springframework.data.annotation.CreatedDate;
@@ -30,8 +29,8 @@ public class Customer extends BaseEntity{
     @Column(name = "place_of_birth",nullable = false)
     private String placeOfBirth;
 
-    @JsonFormat(pattern = "yyyy-MM-dd")
     @Column(name = "date_of_birth")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date birthDate;
 
     @Column(name = "customer_address",nullable = false)

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface CreditAllowanceRepository extends JpaRepository<CreditAllowance,String> {
+    Page<CreditAllowance> findAll(Pageable pageable);
     Page<CreditAllowance> findAll(Specification<CreditAllowance> specification, Pageable pageable);
 
 

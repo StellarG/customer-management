@@ -41,7 +41,7 @@ public class CreditAllowanceController {
     public ResponseEntity<WebResponse<PageResponse<?>>> getAll (
             @RequestParam(name = "size", defaultValue = "10") Integer size,
             @RequestParam(name = "page",defaultValue = "0") Integer page,
-            @RequestParam(name = "sortBy",defaultValue = "name") String sortBy,
+            @RequestParam(name = "sortBy",defaultValue = "creditStatus") String sortBy,
             @RequestParam(name = "direction",defaultValue = "ASC") String direction,
             @RequestParam(name = "creditStatus",required = false) String creditStatus
     ){
